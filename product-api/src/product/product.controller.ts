@@ -23,9 +23,7 @@ export class ProductController implements ProductServiceController {
   constructor(private readonly productService: ProductService) {}
 
   @GrpcMethod('ProductService')
-  async BuyProduct(
-    req: CreateOrderRequest,
-  ): Promise<CreateOrderResponse> {
+  async BuyProduct(req: CreateOrderRequest): Promise<CreateOrderResponse> {
     try {
       const createdOrder = await this.productService.buyProduct(req);
       return { order: createdOrder as any };

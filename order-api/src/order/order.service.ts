@@ -7,12 +7,21 @@ import { Order } from 'src/stubs/order/message';
 export class OrderService {
   constructor(private prisma: PrismaService) {}
 
-  async createOrder(data: any): Promise<any> {
+ async createOrder(data: any): Promise<any> {
+    const { userId, productId, ...rest } = data;
+
+
     const createdOrder = await this.prisma.order.create({
       data: {
-        ...data,
+        ...rest,
+        user: { connect: { id: parseInt(userId, 10) } },
+        products: { connect: { id: parseInt(productId, 10) } },
       },
     });
+
+    console.log(data)
+
+
     return createdOrder;
   }
 

@@ -6,13 +6,8 @@ import { AuthService } from './auth.service';
 
 @Module({
   imports: [
-    ClientsModule.registerAsync([
-      {
-        inject: [ConfigService],
-        name: 'AUTH_SERVICE',
-        useFactory: (cs: ConfigService) => authGrpcOptions(cs),
-      },
-    ]),
+    // ClientsModule.register([authGrpcOptions() as any],
+    // ),
   ],
   providers: [AuthService],
   exports: [AuthService],

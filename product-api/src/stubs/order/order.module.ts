@@ -5,12 +5,12 @@ import { OrderServiceClient } from './service';
 
 @Module({
   imports: [
-    ClientsModule.registerAsync([
-      {
-        inject: [ConfigService],
-        name: 'OrderService',
-      },
-    ]),
+    // ClientsModule.registerAsync([
+    //   {
+    //     inject: [ConfigService],
+    //     name: 'OrderService',
+    //   },
+    // ]),
   ],
   // providers: [OrderServiceClient],
 })

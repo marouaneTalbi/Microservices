@@ -9,14 +9,13 @@ message Order {
   string id = 1;
   string user_id = 2;
   string product_id = 3;
-  repeated string product_ids = 4;
   google.protobuf.Timestamp created_at = 5;
   google.protobuf.Timestamp updated_at = 6;
 }
 
 message CreateOrderRequest {
   string user_id = 1;
-  repeated string product_id = 2;
+  string product_id = 2;
 }
 
 message CreateOrderResponse {

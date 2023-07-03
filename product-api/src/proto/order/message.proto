@@ -3,19 +3,19 @@ syntax = "proto3";
 package order;
 
 import "google/protobuf/timestamp.proto";
-import "user/user.proto";
+// import "user/user.proto";
 
 message Order {
   string id = 1;
   string user_id = 2;
-  repeated string product_ids = 3;
+  string product_id = 3;
   google.protobuf.Timestamp created_at = 4;
   google.protobuf.Timestamp updated_at = 5;
 }
 
 message CreateOrderRequest {
   string user_id = 1;
-  repeated string product_ids = 2;
+  string product_id = 2;
 }
 
 message CreateOrderResponse {
@@ -52,4 +52,12 @@ message ListOrdersRequest {
 
 message ListOrdersResponse {
   repeated Order orders = 1;
+}
+
+service OrderService {
+  rpc CreateOrder(CreateOrderRequest) returns (CreateOrderResponse);
+  rpc GetOrder(GetOrderRequest) returns (GetOrderResponse);
+  rpc UpdateOrder(UpdateOrderRequest) returns (UpdateOrderResponse);
+  rpc DeleteOrder(DeleteOrderRequest) returns (DeleteOrderResponse);
+  rpc ListOrders(ListOrdersRequest) returns (ListOrdersResponse);
 }

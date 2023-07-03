@@ -6,14 +6,14 @@ export const protobufPackage = "order";
 export interface Order {
   id: string;
   userId: string;
-  productIds: string[];
+  productId: string[];
   createdAt: Timestamp | undefined;
   updatedAt: Timestamp | undefined;
 }
 
 export interface CreateOrderRequest {
   userId: string;
-  productIds: string[];
+  productId: string[];
 }
 
 export interface CreateOrderResponse {

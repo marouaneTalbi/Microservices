@@ -4,20 +4,22 @@ import { PrismaService } from '../primsa.service';
 import { Product, UpdateProductRequest } from 'src/stubs/product/message';
 import { v4 as uuidv4 } from 'uuid';
 import { ORDER_SERVICE_NAME, OrderServiceClient } from 'src/stubs/order/service';
-import { Client, ClientGrpc, Transport } from '@nestjs/microservices';
+import { Client, ClientGrpc, ClientProxy, Transport } from '@nestjs/microservices';
 import { join } from 'path';
+import { CreateOrderRequest, CreateOrderResponse, ORDER_PACKAGE_NAME } from 'src/stubs/order/message';
 
 
 @Injectable()
+
 export class ProductService 
-implements OnModuleInit
+  implements OnModuleInit 
 {
 
   private orderService: OrderServiceClient;
 
   constructor(
-    @Inject(ORDER_SERVICE_NAME) private client: ClientGrpc,
-    private prisma: PrismaService) {}
+    @Inject('OrderService') private readonly client: ClientGrpc,
+     private prisma: PrismaService) {}
 
   onModuleInit() {
     this.orderService = this.client.getService<OrderServiceClient>('OrderService');
@@ -26,7 +28,10 @@ implements OnModuleInit
   async buyProduct(req:any): Promise<any> {
     try {
       const createdOrder = await this.orderService.createOrder(req);
+ 
+      console.log(req)
       return { order: createdOrder as any };
+
     } catch (error) {
       console.log(error);
     }

@@ -56,7 +56,7 @@ export interface ListProductsResponse {
 
 export interface BuyProductRequest {
   userId: string;
-  productIds: string;
+  productId: string;
 }
 
 export interface BuyProductResponse {

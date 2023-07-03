@@ -27,7 +27,6 @@ export class OrderController {
       return { order: createdOrder as any };
     } catch (error) {
       console.log(error);
-      // Handle error
     }
   }
 
